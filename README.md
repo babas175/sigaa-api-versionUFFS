@@ -2,7 +2,8 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1ed3e89858204acdb2307febc87da74c)](https://www.codacy.com/gh/GeovaneSchmitz/sigaa-api/dashboard?utm_source=github.com&utm_medium=referral&utm_content=GeovaneSchmitz/sigaa-api&utm_campaign=Badge_Grade)
 
-Essa api é um api de Geovane Schmitz que eu adaptei para poder integrar a UFFS atraves nesse api que foi criado para poder interagir com o Sigaa
+Essa api é um api de Geovane Schmitz que eu adaptei para poder integrar a UFFS através desse api que foi criado que vai permitir interagir com Sigaa da UFFS.
+
 Uma biblioteca de Web Scraping, para acessar o SIGAA (Sistema Integrado de Gestão de Atividades Acadêmicas), ela é a API mais completa disponível no Github. Tem suporte a vários recursos, desde notas, notícias e informações das turmas, lista de atividades, até download de arquivos, foto de perfil e E-mail.
 
 Atualmente, ela já foi testada no IFSC (Instituto Federal de Santa Catarina), IFFar (Instituto Federal Farroupilha) e na UFPB (Universidade Federal da Paraíba).

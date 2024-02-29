@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { decode as htmlEntitiesDecode } from 'he';
 import { URL } from 'url';
 import * as http from 'http';
@@ -7,6 +8,7 @@ import { HTTPRequestOptions } from './sigaa-http';
 import { IFSCPage, SigaaPageIFSC } from './page/sigaa-page-ifsc';
 import { SigaaPageUFPB, UFPBPage } from './page/sigaa-page-ufpb';
 import { SigaaPageUNB, UNBPage } from './page/sigaa-page-unb';
+import { SigaaPageUFFS, UFFSPage } from './page/sigaa-page-uffs';
 
 /**
  * @category Internal
@@ -105,9 +107,9 @@ export interface CommonPage {
   readonly requestBody?: string | Buffer;
 }
 
-export type Page = CommonPage & (IFSCPage | UFPBPage | UNBPage);
+export type Page = CommonPage & (IFSCPage | UFPBPage | UNBPage | UFFSPage);
 export type SigaaPage = CommonSigaaPage &
-  (SigaaPageIFSC | SigaaPageUFPB | SigaaPageUNB);
+  (SigaaPageIFSC | SigaaPageUFPB | SigaaPageUNB | SigaaPageUFFS);
 /**
  * Response page of sigaa.
  * @category Internal

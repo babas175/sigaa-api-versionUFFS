@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const { Sigaa } = require('sigaa-api');
 
 const sigaa = new Sigaa({

@@ -15,6 +15,7 @@ import { SigaaPageInstitutionMap } from './sigaa-institution-controller';
 import { SigaaPageIFSC } from './page/sigaa-page-ifsc';
 import { SigaaPageUFPB } from './page/sigaa-page-ufpb';
 import { SigaaPageUNB } from './page/sigaa-page-unb';
+import { SigaaPageUFFS } from './page/sigaa-page-uffs';
 
 /**
  * @category Public
@@ -285,7 +286,7 @@ export class SigaaHTTP implements HTTP {
       headers: {
         'User-Agent': `SIGAA-Api/1.0 (${
           options.mobile ? 'Android 7.0; ' : ''
-        }https://github.com/GeovaneSchmitz/sigaa-api)`,
+        }https://github.com/babas175/sigaa-api-versionUFFS)`,
         'Accept-Encoding': 'br, gzip, deflate',
         Accept: '*/*',
         'Cache-Control': 'max-age=0',
@@ -465,7 +466,8 @@ export class SigaaHTTP implements HTTP {
       const SigaaPageInstitution: SigaaPageInstitutionMap = {
         IFSC: SigaaPageIFSC,
         UFPB: SigaaPageUFPB,
-        UNB: SigaaPageUNB
+        UNB: SigaaPageUNB,
+        UFFS: SigaaPageUFFS
       };
       const page = new SigaaPageInstitution[
         this.httpSession.institutionController.institution

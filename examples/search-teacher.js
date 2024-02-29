@@ -1,8 +1,9 @@
 const { Sigaa } = require('sigaa-api');
 
+
 const sigaa = new Sigaa({
-  url: 'https://sigaa.ifsc.edu.br',
-  institution: 'IFSC'
+  url: 'https://sigaa.uffs.edu.br',
+  institution: 'UFFS'
 });
 
 const searchTerm = 'José'; // Nome do professor para procurar

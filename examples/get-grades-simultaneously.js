@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const { Sigaa } = require('sigaa-api');
 
 const sigaa = new Sigaa({
@@ -23,6 +24,7 @@ const main = async () => {
     if (bond.type !== 'student') continue; // O tipo pode ser student ou teacher
 
     //Se o tipo do vínculo for student, então tem matrícula e curso
+    // eslint-disable-next-line no-undef
     console.log('Matrícula do vínculo: ' + bond.registration);
     console.log('Curso do vínculo: ' + bond.program);
 

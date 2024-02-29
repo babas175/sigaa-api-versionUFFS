@@ -10,7 +10,7 @@
     "baseUrl": ".",
     "rootDir": "./src",
     "strict": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "strictNullChecks": true,

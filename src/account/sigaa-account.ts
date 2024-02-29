@@ -4,6 +4,7 @@ import { BondType } from '@bonds/sigaa-bond-factory';
 import { SigaaAccountIFSC } from './sigaa-account-ifsc';
 import { SigaaAccountUFPB } from './sigaa-account-ufpb';
 import { SigaaAccountUNB } from './sigaa-account-unb';
+import { SigaaAccountUFFS } from './sigaa-account-uffs';
 
 /**
  * Abstraction of account type.
@@ -73,6 +74,7 @@ export interface Account {
 export type SigaaAccountInstitution =
   | SigaaAccountIFSC
   | SigaaAccountUFPB
+  | SigaaAccountUFFS
   | SigaaAccountUNB;
 
 export type CommonSigaaAccount = Account & SigaaAccountInstitution;

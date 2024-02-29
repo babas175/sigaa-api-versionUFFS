@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Parser } from '@helpers/sigaa-parser';
 import { HTTP, ProgressCallback } from '@session/sigaa-http';
 import { Session } from '@session/sigaa-session';
@@ -69,29 +70,31 @@ export class SigaaAccountUFFS implements Account {
    * @param homepage home page to parse.
    */
   private parseHomepage(homepage: Page): void {
-    //Since the login page can vary, we should check the type of page.
-    if (
-      homepage.bodyDecoded.includes(
-        'O sistema comportou-se de forma inesperada'
-      )
-    ) {
-      throw new Error(
-        'SIGAA: Invalid homepage, the system behaved unexpectedly.'
-      );
+    // Imprima a URL da página para fins de depuração
+    console.log('Homepage URL:', homepage.url.href);
+
+    // Since the login page can vary, we should check the type of page.
+    if (homepage.bodyDecoded.includes('O sistema comportou-se de forma inesperada')) {
+        throw new Error('SIGAA: Invalid homepage, the system behaved unexpectedly.');
     }
+
     if (homepage.url.href.includes('/portais/discente/beta/discente.jsf')) {
-      //If it is home page student of desktop version.
-      this.pagehomeParsePromise = this.parseStudentHomePage(homepage);
+        // If it is the home page of the student desktop version.
+        this.pagehomeParsePromise = this.parseStudentHomePage(homepage);
     } else if (
-      homepage.url.href.includes('/sigaa/vinculos.jsf') ||
-      homepage.url.href.includes('/sigaa/escolhaVinculo.do')
+        homepage.url.href.includes('/sigaa/vinculos.jsf') ||
+        homepage.url.href.includes('/sigaa/escolhaVinculo.do')
     ) {
-      //If it is bond page.
-      this.pagehomeParsePromise = this.parseBondPage(homepage);
+        // If it is a bond page.
+        this.pagehomeParsePromise = this.parseBondPage(homepage);
     } else {
-      throw new Error('SIGAA: Unknown homepage format.');
+        // Log adicional para identificar a URL desconhecida
+        console.log('Unknown homepage URL:', homepage.url.href);
+
+        throw new Error('SIGAA: Unknown homepage format.');
     }
-  }
+}
+
 
   /**
    * Parse bond page.

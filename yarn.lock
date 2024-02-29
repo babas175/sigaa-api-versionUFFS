@@ -5078,16 +5078,16 @@ side-channel@^1.0.4:
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
 
-sigaa-api@^1.0.34:
-  version "1.0.34"
-  resolved "https://registry.npmjs.org/sigaa-api/-/sigaa-api-1.0.34.tgz"
-  integrity sha512-e8QILWD57/mI8y47sdDGpXcavuT5P9U5F8/GRz3CIDa3XgXZU2IkBBji9ZxRNnBc5ImqWQ620jFToB++d0DGxA==
+sigaa-api@^1.0.34, "sigaa-api@github:babas175/sigaa-api-versionUFFS":
+  version "1.0.35"
+  resolved "git+ssh://git@github.com/babas175/sigaa-api-versionUFFS.git#4f96258a2993f028aec9ad6942b1e68fdc5204b7"
   dependencies:
     cheerio "^1.0.0-rc.10"
     formdata-node "^3.6.3"
     he "^1.2.0"
     iconv-lite "^0.6.3"
     lodash "^4.17.20"
+    sigaa-api "^1.0.34"
     source-map-support "^0.5.19"
 
 signal-exit@^3.0.2, signal-exit@^3.0.3:

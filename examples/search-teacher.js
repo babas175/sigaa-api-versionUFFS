@@ -6,7 +6,7 @@ const sigaa = new Sigaa({
   institution: 'UFFS'
 });
 
-const searchTerm = 'José'; // Nome do professor para procurar
+const searchTerm = 'Giancarlo'; // Nome do professor para procurar
 
 const searchTeacher = sigaa.search.teacher();
 async function main() {

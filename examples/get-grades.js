@@ -1,83 +1,86 @@
-const { Sigaa } = require('sigaa-api');
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
+const Sigaa = require("sigaa-api").Sigaa;
 
 const sigaa = new Sigaa({
-  url: 'https://sigaa.ifsc.edu.br',
-  institution: 'IFSC'
+  url: "https://sigaa.uffs.edu.br",
+  institution: 'UFFS'
 });
 
 // coloque seu usuário
 const username = '';
 const password = '';
 
+// Serve só para exibir as notas no console
+const printGrades = (gradesGroups) => {
+  for (const gradesGroup of gradesGroups) {
+    console.log("->" + gradesGroup.name);
+    switch (gradesGroup.type) {
+      case "only-average":
+        console.log(gradesGroup.value);
+        break;
+
+      case "weighted-average":
+        for (const grade of gradesGroup.grades) {
+          console.log("-" + grade.name);
+          console.log("peso: " + grade.weight);
+          console.log(grade.value);
+        }
+
+        console.log("média:" + gradesGroup.value);
+
+        break;
+
+      case "sum-of-grades":
+        for (const grade of gradesGroup.grades) {
+          console.log("-" + grade.name);
+          console.log("Valor máximo: " + grade.maxValue);
+          console.log(grade.value);
+        }
+
+        console.log("soma:" + gradesGroup.value);
+        break;
+    }
+    console.log(""); // Para espaçar as linhas
+  }
+};
+
 const main = async () => {
   const account = await sigaa.login(username, password); // login
 
-  /**
-   * O usuário pode ter mais de um vínculo
-   * @see https://github.com/GeovaneSchmitz/sigaa-api/issues/4
-   **/
-  const bonds = await account.getActiveBonds();
-
-  //Para cada vínculo
-  for (const bond of bonds) {
-    if (bond.type !== 'student') continue; // O tipo pode ser student ou teacher
-
-    //Se o tipo do vínculo for student, então tem matrícula e curso
-    console.log('Matrícula do vínculo: ' + bond.registration);
-    console.log('Curso do vínculo: ' + bond.program);
-
-    // Se for usado bond.getCourses(true); todas as turmas são retornadas, incluindo turmas de outros semestres
-    const courses = await bond.getCourses();
-
-    // Para cada turma
-    for (const course of courses) {
-      console.log(' > ' + course.title);
-      // Pega as notas
-      const gradesGroups = await course.getGrades();
-      for (const gradesGroup of gradesGroups) {
-        console.log('->' + gradesGroup.name);
-        switch (
-          gradesGroup.type //Existem 3 tipos de grupos de notas
-        ) {
-          // O primiro tipo (only-average) é somente o valor final, mesmo assim, pode ser que o valor ainda seja indefinido
-          case 'only-average':
-            console.log(gradesGroup.value);
-            break;
-
-          // O segundo (weighted-average) é um grupo com notas ponderadas (tem peso), mas os pesos podem serem todos iguais
-          case 'weighted-average':
-            //Para cada nota do grupo
-            for (const grade of gradesGroup.grades) {
-              console.log('-' + grade.name);
-              // O peso dessa nota
-              console.log('peso: ' + grade.weight);
-              // O valor dessa nota pode ser também indefinido
-              console.log(grade.value);
-            }
-
-            // A média final do grupo
-            console.log('média:' + gradesGroup.value);
-
-            break;
-
-          // O terceiro (sum-of-grades) é um grupo de soma de notas, não tem peso, mas cada nota tem um valor máximo
-          case 'sum-of-grades':
-            //Para cada nota do grupo
-            for (const grade of gradesGroup.grades) {
-              console.log('-' + grade.name);
-              // O valor máximo dessa nota
-              console.log('Valor máximo: ' + grade.maxValue);
-              // O valor dessa nota pode ser também indefinido
-              console.log(grade.value);
-            }
-
-            // A soma final do grupo
-            console.log('soma:' + gradesGroup.value);
-            break;
-        }
-      }
-      console.log(''); // Para espaçar as linhas
+  const activeBonds = await account.getActiveBonds();
+  for (const bond of activeBonds) {
+    console.log(">Vínculos ativos");
+    if (bond.type === "student") {
+      console.log("Matrícula do vínculo: " + bond.registration);
+      console.log("Curso do vínculo: " + bond.program);
+    } else {
+      console.log("vínculo de professor");
     }
+  }
+
+  const inactiveBonds = await account.getInactiveBonds();
+
+  for (const bond of inactiveBonds) {
+    console.log(">Vínculos inativos");
+    if (bond.type === "student") {
+      console.log("Matrícula do vínculo: " + bond.registration);
+      console.log("Curso do vínculo: " + bond.program);
+    } else {
+      console.log("vínculo de professor");
+    }
+  }
+  for (let i = 0; i < (await activeBonds[0].getCourses()).length; i++) {
+      const course = (await activeBonds[0].getCourses())[i];
+      console.log(course.title);
+      printGrades(await course.getGrades());
+  }
+
+  for (let i = 0; i < (await inactiveBonds[0].getCourses()).length; i++) {
+      const course = (await inactiveBonds[0].getCourses())[i];
+      console.log(course.title);
+      printGrades(await course.getGrades());
   }
 
   // Encerra a sessão

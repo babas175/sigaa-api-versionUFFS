@@ -1,8 +1,8 @@
 const { Sigaa } = require('sigaa-api');
 
 const sigaa = new Sigaa({
-  url: 'https://sigaa.ifsc.edu.br',
-  institution: 'IFSC'
+  url: 'https://sigaa.uffs.edu.br',
+  institution: 'UFFS'
 });
 
 // coloque seu usuário
@@ -14,7 +14,7 @@ const main = async () => {
 
   /**
    * O usuário pode ter mais de um vínculo
-   * @see https://github.com/GeovaneSchmitz/sigaa-api/issues/4
+   * @see https://github.com/babas175/sigaa-api-versionUFFS
    **/
   const bonds = await account.getActiveBonds();
 

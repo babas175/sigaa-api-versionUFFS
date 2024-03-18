@@ -56,7 +56,7 @@ const main = async () => {
           (await homework.getFlagIsGroupHomework()) ? 'É em grupo' : 'É individual'
         );
 
-        // A data de início para envio da tarefa
+        // A data de início para envio da tarefa|\
         console.log('Data de início: ' + homework.startDate);
 
         // A data de termino para envio da tarefa
